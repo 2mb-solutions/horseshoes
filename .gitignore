@@ -1,0 +1,13 @@
+a.out
+*.obj
+a.exe
+*/a.exe
+./horseshoes
+horseshoes.exe
+*/horseshoes.exe
+distrib
+errors.log
+error.log
+*/errors.log
+*/error.log
+horseshoes.*

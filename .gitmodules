@@ -1,0 +1,3 @@
+[submodule "game-kit"]
+	path = game-kit
+	url = https://github.com/2mb-solutions/game-kit.git
