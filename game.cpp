@@ -109,17 +109,17 @@ if(m) {
 m->set_gain(0);
 m->play();
 }
-r = mainMenu->run_extended("", "", 1, true);
+r = mainMenu->run_extended("", "Use your arrow keys to navigate the menu, and the enter key to select.", 1, true);
 if (r == 2)
 {
 credits(disp, "Horseshoes");
 }
 if(r == 1) {
 int gameMode,gameDifficulty;
-int r2 = modeMenu->run_extended("", "", 1, true);
+int r2 = modeMenu->run_extended("", "Use your arrow keys to navigate the menu, and the enter key to select.", 1, true);
 if(r2 == 1 || r2 == 3)
 {
-int r3 = difficultyMenu->run_extended("", "", 2, true);
+int r3 = difficultyMenu->run_extended("", "Use your arrow keys to navigate the menu, and the enter key to select.", 2, true);
 if(r2 < 4 && r2 > 0)
 gameMode = r2-1;
 if (r3 != 5 && r3 != 0 && r3 != -1 && r3 != 4)
