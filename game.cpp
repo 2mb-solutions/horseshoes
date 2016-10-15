@@ -24,7 +24,6 @@ void play(int mode, int diff);
 
 int main(int argc, char** argv) {
 srand ( time(NULL) ); //initialize the random seed
-log_open("errors.log");
 /*
 if(!al_install_system(ALLEGRO_VERSION_INT, NULL)) {
 log("Could not initialize allegro.\n");
@@ -58,8 +57,10 @@ return 1;
 }
 */
 ALLEGRO_DISPLAY* disp = game_window("Horseshoes");
-if(!disp)
-return 1;
+if(!disp) {
+log_close();
+	return 1;
+}
 sound* s = new sound();
 if(!s->load("sounds/select.ogg")) {
 log("Could not load selection sound.\n");
