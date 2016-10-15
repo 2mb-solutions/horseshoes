@@ -86,13 +86,16 @@ direction = do_computer_direction(diff);
 else {
 sr.speak_any(playerName[turn] + " is up to throw. Press space to start.");
 do {
-if(kb.key_pressed(ALLEGRO_KEY_ESCAPE)) {
+if(kb.key_pressed(ALLEGRO_KEY_ESCAPE) || ((kb.key_down(ALLEGRO_KEY_ALT) || kb.key_down(ALLEGRO_KEY_ALTGR)) && kb.key_pressed(ALLEGRO_KEY_F4))) {
 return;
 }
 al_rest(0.005);
 } while(!kb.key_pressed(ALLEGRO_KEY_SPACE));
 sr.speak_any_interrupt("Press space to choose your distance!");
 power = power_bar("sounds/power.ogg");
+if (power == -100) {
+return;
+}
 sr.speak_any_interrupt("Hit it in the middle! Press space to throw!");
 direction = direction_bar("sounds/direction.ogg");
 }
