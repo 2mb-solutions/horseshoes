@@ -2,7 +2,7 @@ a.out
 *.obj
 a.exe
 */a.exe
-./horseshoes
+horseshoes
 horseshoes.exe
 */horseshoes.exe
 distrib
