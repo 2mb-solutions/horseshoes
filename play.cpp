@@ -84,14 +84,16 @@ power = do_computer_power(diff);
 direction = do_computer_direction(diff);
 }
 else {
-sr.speak_any(playerName[turn] + " is up to throw.");
+sr.speak_any(playerName[turn] + " is up to throw. Press space to start.");
 do {
 if(kb.key_pressed(ALLEGRO_KEY_ESCAPE)) {
 return;
 }
 al_rest(0.005);
 } while(!kb.key_pressed(ALLEGRO_KEY_SPACE));
+sr.speak_any_interrupt("Press space to choose your distance!");
 power = power_bar("sounds/power.ogg");
+sr.speak_any_interrupt("Hit it in the middle! Press space to throw!");
 direction = direction_bar("sounds/direction.ogg");
 }
 if(direction == -100 || power == -100) {
