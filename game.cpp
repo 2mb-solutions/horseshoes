@@ -5,7 +5,7 @@ Released under the terms of the unlicense: http://unlicense.org
 Billy: https://stormdragon.tk/
 Michael: https://michaeltaboada.me
 */
-#define ALLEGRO_STATICLINK 1  
+//#define ALLEGRO_STATICLINK 1  
 #include <allegro5/allegro.h>
 #include "dynamic_menu.h"
 #include <keyboard.h>
@@ -58,6 +58,8 @@ return 1;
 }
 */
 ALLEGRO_DISPLAY* disp = game_window("Horseshoes");
+if(!disp)
+return 1;
 sound* s = new sound();
 if(!s->load("sounds/select.ogg")) {
 log("Could not load selection sound.\n");

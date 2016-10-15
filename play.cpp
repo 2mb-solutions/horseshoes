@@ -5,7 +5,7 @@ Released under the terms of the unlicense: http://unlicense.org
 Billy: https://stormdragon.tk/
 Michael: https://michaeltaboada.me
 */
-#define ALLEGRO_STATICLINK 1
+//#define ALLEGRO_STATICLINK 1
 #include <screen_reader.h>
 #include <allegro5/allegro.h>
 #include <sound.h>
