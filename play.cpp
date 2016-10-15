@@ -20,6 +20,7 @@ void play_throw(int p, int d);
 void play_score(int sc, int p, int d, int score0, int score1);
 int do_computer_power(int p);
 int do_computer_direction(int d);
+bool instructions;
 
 
 void play(int mode, int diff)
@@ -84,19 +85,30 @@ power = do_computer_power(diff);
 direction = do_computer_direction(diff);
 }
 else {
-sr.speak_any(playerName[turn] + " is up to throw. Press space to start.");
+sr.speak_any(playerName[turn] + " is up to throw.");
+if (instructions == false)
+{
+sr.speak_any("Press space to start.");
+}
 do {
 if(kb.key_pressed(ALLEGRO_KEY_ESCAPE) || ((kb.key_down(ALLEGRO_KEY_ALT) || kb.key_down(ALLEGRO_KEY_ALTGR)) && kb.key_pressed(ALLEGRO_KEY_F4))) {
 return;
 }
 al_rest(0.005);
 } while(!kb.key_pressed(ALLEGRO_KEY_SPACE));
+if(instructions == false)
+{
 sr.speak_any_interrupt("Press space to choose your distance!");
+}
 power = power_bar("sounds/power.ogg");
 if (power == -100) {
 return;
 }
+if (instructions == false)
+{
 sr.speak_any_interrupt("Hit it in the middle! Press space to throw!");
+instructions = true;
+}
 direction = direction_bar("sounds/direction.ogg");
 }
 if(direction == -100 || power == -100) {
