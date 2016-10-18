@@ -1,0 +1,33 @@
+Horseshoes:
+By 2MB Solutions (https://2mb.solutions).
+Released under the terms of the unlicense. See LICENSE for details.
+
+Compilation:
+Make sure you have either 1. recursively cloned this repository (git clone --recursive) or that you have done the following: git submodule update --init
+2. On windows, run comp.bat from a visual studio 2015 command prompt with c++ support installed.
+3. On linux, run comp.sh with allegro5 and supporting libraries (libogg, libvorbis, libvorbisfile, allegro-font, allegro-audio, allegro-acodec) installed. Uses g++. Also requires speech-dispatcher.
+4. On windows, copy game-kit/allegro_stuff/win-distrib32 to a new folder. Also copy game-kit/screen-reader/win-distrib32 to that folder.
+5. Also on windows, copy horseshoes.exe and the sounds directory to that folder. Note: Do not copy the contents of the sounds folder, copy the entire folder itself.
+6. On linux, as long as liballegro and other supporting libraries can be found on your path, and speech-dispatcher is properly configured, you should just be able to run ./horseshoes in a graphical terminal.
+7. On windows, run horseshoes.exe from the folder you copied everything into.
+Note: On mac, the build is not yet completely working. It will work with similar instructions to the linux instructions above, replacing comp.sh with comp-mac.sh, and with older versions of allegro's libraries. We are planning to have this fixed soon.
+
+Usage:
+On windows, horseshoes will speak through jaws, dolphin/supernova, NVDA, system access, Window Eyes, or sapi. We haven't been able to fully test all the screen reader code in a while, but so far we know it works with NVDA, Jaws (relatively new versions, maybe 11+?), and sapi. Please report others failing or working to us.
+On linux, as previously mentioned, this game will speak through speech dispatcher. If no speech is heard, make sure to check your speech dispatcher configuration. If orca is running, and speaks something, it may get queued along with our speech, so you may want to silence or turn it off before starting the game.
+
+Packages:
+The latest .exe builds for windows will always be found here: https://2mb.solutions/horseshoes-win32.zip
+Arch linux has AUR packages. Either install horseshoes (stable) or horseshoes-git (possibly less stable) from the AUR with your favorite AUR helper.
+More linux packages hopefully will be coming soon, along with a mac package.
+
+Contributing:
+Found a bug? Would like to suggest improvements? Want to hack on the code? We'd love to hear from you or get your contributions! Please feel free to open issues or pull requests on this repository, or email us. Michael[4t]2mb[d0t]solutions (email intentionally obfiscated).
+
+License:
+This work is licensed under the unlicense (see LICENSE for details). Basically this means, do whatever you want with the code. We would prefer attribution, but you're technically not obligated. It's just polite. :-).
+
+Have fun!
+
+-Michael: (https://michaeltaboada.me)
+Billy: (https://stormdragon.tk)
