@@ -3,10 +3,10 @@ By 2MB Solutions (https://2mb.solutions).
 Released under the terms of the unlicense. See LICENSE for details.
 
 Compilation:
-Make sure you have either 1. recursively cloned this repository (git clone --recursive) or that you have done the following: git submodule update --init
+1. Make sure you have either 1. recursively cloned this repository (git clone --recursive) or that you have done the following: git submodule update --init
 2. On windows, run comp.bat from a visual studio 2015 command prompt with c++ support installed.
 3. On linux, run comp.sh with allegro5 and supporting libraries (libogg, libvorbis, libvorbisfile, allegro-font, allegro-audio, allegro-acodec) installed. Uses g++. Also requires speech-dispatcher.
-4. On windows, copy game-kit/allegro_stuff/win-distrib32 to a new folder. Also copy game-kit/screen-reader/win-distrib32 to that folder.
+4. On windows, copy the contents of game-kit/allegro_stuff/win-distrib32 to a new folder. Also copy the contents of game-kit/screen-reader/win-distrib32 to that folder.
 5. Also on windows, copy horseshoes.exe and the sounds directory to that folder. Note: Do not copy the contents of the sounds folder, copy the entire folder itself.
 6. On linux, as long as liballegro and other supporting libraries can be found on your path, and speech-dispatcher is properly configured, you should just be able to run ./horseshoes in a graphical terminal.
 7. On windows, run horseshoes.exe from the folder you copied everything into.
