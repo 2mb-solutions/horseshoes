@@ -24,38 +24,6 @@ void play(int mode, int diff);
 
 int main(int argc, char** argv) {
 srand ( time(NULL) ); //initialize the random seed
-/*
-if(!al_install_system(ALLEGRO_VERSION_INT, NULL)) {
-log("Could not initialize allegro.\n");
-return 1;
-}
-ALLEGRO_DISPLAY* disp = al_create_display(640, 480);
-if(!disp) {
-log("Could not create display.\n");
-return 1;
-}
-if(!al_install_keyboard()) {
-log("Could not install keyboard hooks.\n");
-al_destroy_display(disp);
-al_uninstall_system();
-return 1;
-}
-if(!al_install_audio()) {
-log("Could not install audio hooks.\n");
-al_uninstall_keyboard();
-al_destroy_display(disp);
-al_uninstall_system();
-return 1;
-}
-if(!al_init_acodec_addon()) {
-log("Could not initialize codec routines.\n");
-al_uninstall_audio();
-al_uninstall_keyboard();
-al_destroy_display(disp);
-al_uninstall_system();;
-return 1;
-}
-*/
 ALLEGRO_DISPLAY* disp = game_window("Horseshoes");
 if(!disp) {
 log_close();

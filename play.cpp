@@ -169,46 +169,6 @@ sound s;
 if(!s.load("sounds/throw.ogg")) {
 log("Could not load throw sound.\n");
 }
-/*
-int dir = 0;
-if(d < -7 && d >= -15) {
-dir = -1;
-}
-else if(d < -15 && d > -25) {
-dir = -2;
-}
-else if(d < -25 && d > -35) {
-dir = -3;
-}
-else if(d < -35 && d >-45) {
-dir = -4;
-}
-else if( d <= -45) {
-dir = -5;
-}
-else if(d > 7 && d < 15) {
-dir = 1;
-}
-else if(d > 15 && d < 25) {
-dir = 2;
-}
-else if(d > 25 && d < 35) {
-dir = 3;
-}
-else if(d > 35 && d < 45) {
-dir = 4;
-}
-else if(d >= 45) {
-dir = 5;
-}
-int pow = -25;
-if(p < 160) {
-pow = -15;
-}
-else if(p > 168) {
-pow = -35;
-}
-*/
 int dir = d/10;
 int pow = p/-20;
 for(int x = 0; x >= pow; x--) {
