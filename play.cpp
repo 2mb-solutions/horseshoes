@@ -1,7 +1,7 @@
 /*
 *Horseshoes
 By 2MB Solutions: https//2mb.solutions
-Released under the terms of the unlicense: http://unlicense.org
+Released under the MIT license. See license.txt for details.
 Billy: https://stormdragon.tk/
 Michael: https://michaeltaboada.me
 */
