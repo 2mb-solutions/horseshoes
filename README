@@ -1,6 +1,6 @@
 Horseshoes:
 By 2MB Solutions (https://2mb.solutions).
-Released under the terms of the unlicense. See LICENSE for details.
+Released under the MIT license. See license.txt for details.
 
 Compilation:
 1. Make sure you have either 1. recursively cloned this repository (git clone --recursive) or that you have done the following: git submodule update --init
@@ -23,9 +23,6 @@ More linux packages hopefully will be coming soon, along with a mac package.
 
 Contributing:
 Found a bug? Would like to suggest improvements? Want to hack on the code? We'd love to hear from you or get your contributions! Please feel free to open issues or pull requests on this repository, or email us. Michael[4t]2mb[d0t]solutions (email intentionally obfiscated).
-
-License:
-This work is licensed under the unlicense (see LICENSE for details). Basically this means, do whatever you want with the code. We would prefer attribution, but you're technically not obligated. It's just polite. :-).
 
 Have fun!
 
