@@ -104,6 +104,9 @@ power = power_bar("sounds/power.ogg");
 if (power == -100) {
 return;
 }
+if (power == -101) {
+continue;
+}
 if (instructions == false)
 {
 sr.speak_any_interrupt("Hit it in the middle! Press space to throw!");
@@ -113,6 +116,9 @@ direction = direction_bar("sounds/direction.ogg");
 }
 if(direction == -100 || power == -100) {
 return;
+}
+if (direction == -101) {
+continue;
 }
 play_throw(power, direction);
 int sc = 0;
