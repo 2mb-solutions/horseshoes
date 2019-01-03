@@ -443,8 +443,8 @@ fullclean: clean packageclean
 
 fix_names:
 	mkdir $(OUTPUT).app/Contents/MacOS/lib;\
-	macpack $(OUTPUT).app/Contents/MacOS/$(OUTPUT) -d $(OUTPUT).app/Contents/MacOS/lib
+	macpack $(OUTPUT).app/Contents/MacOS/$(OUTPUT) -d lib
 
 fix_names_demo:
 	mkdir $(OUTPUT)-demo.app/Contents/MacOS/lib;\
-	macpack $(OUTPUT)-demo.app/Contents/MacOS/$(OUTPUT) -d $(OUTPUT)-demo.app/Contents/MacOS/lib
+	macpack $(OUTPUT)-demo.app/Contents/MacOS/$(OUTPUT) -d lib
