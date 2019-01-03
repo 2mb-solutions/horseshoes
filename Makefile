@@ -7,12 +7,12 @@ OUTPUT=horseshoes
 #enable if you want to profile.
 PROF =
 LINCFLAGS	= -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra -Wno-unused-variable -Wno-unused-parameter -I/usr/include/speech-dispatcher -I/usr/include -Igame-kit/allegro_stuff -Igame-kit/screen-reader -Igame-kit
-MACCFLAGS       = -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra -Wno-unused-variable -Wno-unused-parameter -I/usr/include/speech-dispatcher -I/usr/include -Igame-kit/allegro_stuff -Igame-kit/screen-reader -Igame-kit
+MACCFLAGS       = -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra -Wno-unused-variable -Wno-unused-parameter -I/usr/include -Igame-kit/allegro_stuff -Igame-kit/screen-reader -Igame-kit -Igame-kit/allegro_stuff/include-mac -framework ApplicationServices -framework OpenGL -framework OpenAL -framework AppKit -framework CoreFoundation -framework AudioToolbox -framework IOKit
 WINCFLAGS=/nologo /EHsc /MT /Igame-kit/allegro_stuff /Igame-kit/screen-reader /Igame-kit/allegro_stuff/include-win /Igame-kit
 
 #required libraries
 LINLDFLAGS	= -lallegro_audio -lallegro_acodec -lallegro -lallegro_font -lspeechd
-MACLDFLAGS      = -lallegro_audio -lallegro_acodec -lallegro -lallegro_font -lspeechd
+MACLDFLAGS      = -lallegro_audio -lallegro_acodec -lallegro -lallegro_font -framework ApplicationServices -framework OpenGL -framework OpenAL -framework AppKit -framework CoreFoundation -framework AudioToolbox -framework IOKit
 WINLDFLAGS=/nologo /subsystem:windows,5.01 /libpath:game-kit/allegro_stuff/win-lib32 \
 /libpath:game-kit/screen-reader dolapi.lib saapi32.lib nvdaControllerClient32.lib allegro_acodec.lib  allegro_audio.lib allegro.lib allegro_font.lib \
 FLAC.lib opengl32.lib ogg.lib vorbis.lib vorbisfile.lib dumb.lib freetype.lib winmm.lib psapi.lib gdi32.lib opus.lib opusfile.lib
@@ -33,7 +33,7 @@ GK_S_FILES= game-kit/allegro_stuff/sound.cpp game-kit/allegro_stuff/keyboard.cpp
 game-kit/allegro_stuff/dynamic_menu.cpp game-kit/menu_helper.cpp game-kit/misc.cpp game-kit/soundplayer.cpp game-kit/allegro_stuff/sound_pool_item.cpp \
 game-kit/allegro_stuff/sound_pool.cpp
 # regular source files, specific to the game.
-S_FILES=  play.cpp game.cpp
+S_FILES= play.cpp game.cpp
 
 # does this program have a demo?
 #HASDEMO=true
@@ -161,6 +161,7 @@ package: package_demo package_full
 else
 package:
 	@$(ECHO) Building release package
+ifneq ($(OSVAR),mac)
 	@if [ -d distrib ]; then \
 	rm -rf distrib;\
 	fi
@@ -230,12 +231,31 @@ else
 	7z a -r $(subst .exe,,$(OUTPUT))-$(OSVAR).zip $(subst .exe,,$(OUTPUT))-$(OSVAR)
 	@rm -rf packages/$(subst .exe,,$(OUTPUT))-$(OSVAR)
 endif
+else
+	@[ -d "$(OUTPUT).app" ] && rm -rf $(OUTPUT).app
+	@mkdir $(OUTPUT).app
+	@mkdir -p $(OUTPUT).app/Contents/MacOS
+	@cp Info.plist $(OUTPUT).app/Contents
+	@cp -r game-kit/allegro_stuff/mac-lib64 $(OUTPUT).app/Contents/MacOS/lib
+	@cp $(OUTPUT)-launcher $(OUTPUT).app/MacOS/Contents
+	@mkdir $(OUTPUT).app/MacOS/Resources
+	@for x in "$(RESOURCES)";do \
+	cp -R $$x $(OUTPUT).app/MacOS/Resources;\
+	done
+	@$(MAKE)
+	@cp $(OUTPUT) $(OUTPUT).app/MacOS/Contents
+	@$(MAKE) fix_names
+	@[ ! -d packages ] && mkdir packages
+	@[ -f "packages/$(OUTPUT)-$(OSVAR)-x86-64.zip" ] && rm "packages/$(OUTPUT)-$(OSVAR)-x86-64.zip"
+	@zip -r "packages/$(OUTPUT)-$(OSVAR)-x86-64.zip" "$(OUTPUT).app"
+endif
 	@$(ECHO) Find the built archive under the packages directory.
 endif
 
 ifeq ($(HASDEMO),true)
 package_demo:
 	@$(ECHO) Building demo release package
+ifneq ($(OSVAR),mac)
 	@if [ -d distrib ]; then \
 	rm -rf distrib;\
 	fi
@@ -305,10 +325,29 @@ else
 	7z a -r $(subst .exe,,$(OUTPUT))-$(OSVAR)-demo.zip $(subst .exe,,$(OUTPUT))-$(OSVAR)-demo
 	@rm -rf packages/$(subst .exe,,$(OUTPUT))-$(OSVAR)-demo
 endif
+else
+	@[ -d "$(OUTPUT)-demo.app" ] && rm -rf $(OUTPUT)-demo.app
+	@mkdir $(OUTPUT)-demo.app
+	@mkdir -p $(OUTPUT)-demo.app/Contents/MacOS
+	@cp Info.plist $(OUTPUT)-demo.app/Contents
+	@cp -r game-kit/allegro_stuff/mac-lib64 $(OUTPUT)-demo.app/Contents/MacOS/lib
+	@cp $(OUTPUT)-launcher $(OUTPUT)-demo.app/MacOS/Contents
+	@mkdir $(OUTPUT)-demo.app/MacOS/Resources
+	@for x in "$(RESOURCES)";do \
+	cp -R $$x $(OUTPUT)-demo.app/MacOS/Resources;\
+	done
+	@$(MAKE) demo
+	@cp $(OUTPUT) $(OUTPUT)-demo.app/MacOS/Contents
+	@$(MAKE) fix_names_demo
+	@[ ! -d packages ] && mkdir packages
+	@[ -f "packages/$(OUTPUT)-$(OSVAR)-x86-64-demo.zip" ] && rm "packages/$(OUTPUT)-$(OSVAR)-x86-64-demo.zip"
+	@zip -r "packages/$(OUTPUT)-$(OSVAR)-x86-64-demo.zip" "$(OUTPUT)-demo.app"
+endif
 	@$(ECHO) Find the built archive under the packages directory.
 
 package_full:
 	@$(ECHO) Building full release package
+ifneq ($(OSVAR),mac)
 	@if [ -d distrib ]; then \
 	rm -rf distrib;\
 	fi
@@ -378,6 +417,24 @@ else
 	7z a -r $(subst .exe,,$(OUTPUT))-$(OSVAR)-full.zip $(subst .exe,,$(OUTPUT))-$(OSVAR)-full
 	@rm -rf packages/$(subst .exe,,$(OUTPUT))-$(OSVAR)-full
 endif
+else
+	@[ -d "$(OUTPUT).app" ] && rm -rf $(OUTPUT).app
+	@mkdir $(OUTPUT).app
+	@mkdir -p $(OUTPUT).app/Contents/MacOS
+	@cp Info.plist $(OUTPUT).app/Contents
+	@cp -r game-kit/allegro_stuff/mac-lib64 $(OUTPUT).app/Contents/MacOS/lib
+	@cp $(OUTPUT)-launcher $(OUTPUT).app/MacOS/Contents
+	@mkdir $(OUTPUT).app/MacOS/Resources
+	@for x in "$(RESOURCES)";do \
+	cp -R $$x $(OUTPUT).app/MacOS/Resources;\
+	done
+	@$(MAKE) full
+	@cp $(OUTPUT) $(OUTPUT).app/MacOS/Contents
+	@$(MAKE) fix_names
+	@[ ! -d packages ] && mkdir packages
+	@[ -f "packages/$(OUTPUT)-$(OSVAR)-x86-64.zip" ] && rm "packages/$(OUTPUT)-$(OSVAR)-x86-64.zip"
+	@zip -r "packages/$(OUTPUT)-$(OSVAR)-x86-64.zip" "$(OUTPUT).app"
+endif
 	@$(ECHO) Find the built archive under the packages directory.
 endif
 
@@ -386,3 +443,21 @@ packageclean:
 	@$(RM) -r packages
 
 fullclean: clean packageclean
+
+fix_names:
+	@install_name_tool -change /usr/local/lib/libFLAC.8.dylib @loader_path/lib/libFLAC.dylib $(OUTPUT).app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/libogg/lib/libogg.0.dylib @loader_path/lib/libogg.dylib $(OUTPUT).app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/opus/lib/libopus.0.dylib @loader_path/lib/libopus.dylib $(OUTPUT).app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/opusfile/lib/libopusfile.0.dylib @loader_path/lib/libopusfile.dylib $(OUTPUT).app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/libvorbis/lib/libvorbis.0.dylib @loader_path/lib/libvorbis.dylib $(OUTPUT).app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/libvorbis/lib/libvorbisfile.3.dylib @loader_path/lib/libvorbisfile.dylib $(OUTPUT).app/Contents/MacOS/$(OUTPUT)
+	@for x in {allegro_main,allegro_font,allegro_audio,allegro_acodec,allegro};do install_name_tool -change /usr/local/opt/allegro/lib/lib$x.5.2.dylib @loader_path/lib/lib$x.dylib $(OUTPUT).app/Contents/MacOS/$(OUTPUT);done
+
+fix_names_demo:
+	@install_name_tool -change /usr/local/lib/libFLAC.8.dylib @loader_path/lib/libFLAC.dylib $(OUTPUT)-demo.app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/libogg/lib/libogg.0.dylib @loader_path/lib/libogg.dylib $(OUTPUT)-demo.app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/opus/lib/libopus.0.dylib @loader_path/lib/libopus.dylib $(OUTPUT)-demo.app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/opusfile/lib/libopusfile.0.dylib @loader_path/lib/libopusfile.dylib $(OUTPUT)-demo.app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/libvorbis/lib/libvorbis.0.dylib @loader_path/lib/libvorbis.dylib $(OUTPUT)-demo.app/Contents/MacOS/$(OUTPUT)
+	@install_name_tool -change /usr/local/opt/libvorbis/lib/libvorbisfile.3.dylib @loader_path/lib/libvorbisfile.dylib $(OUTPUT)-demo.app/Contents/MacOS/$(OUTPUT)
+	@for x in {allegro_main,allegro_font,allegro_audio,allegro_acodec,allegro};do install_name_tool -change /usr/local/opt/allegro/lib/lib$x.5.2.dylib @loader_path/lib/lib$x.dylib $(OUTPUT)-demo.app/Contents/MacOS/$(OUTPUT);done
