@@ -1,33 +1,33 @@
 # makefile for mine racer and 2MB projects.
 # adapted from the aspen mud makefile.
 #compiler and project specific variables
-OUTPUT=horseshoes
+OUTPUT = horseshoes
 
 #compiler flags:
 #enable if you want to profile.
 PROF =
-LINCXXFLAGS	= -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra -Wno-unused-variable \
+LINCXXFLAGS = -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra -Wno-unused-variable \
  -Wno-unused-parameter -I/usr/include/speech-dispatcher -I/usr/include -Igame-kit/allegro_stuff \
  -Igame-kit/screen-reader -Igame-kit
-MACCXXFLAGS       = -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra \
+MACCXXFLAGS = -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra \
  -Wno-unused-variable -Wno-unused-parameter -I/usr/include -Igame-kit/allegro_stuff \
  -Igame-kit/screen-reader -Igame-kit -Igame-kit/allegro_stuff/include-mac \
  -framework ApplicationServices -framework OpenGL -framework OpenAL -framework AppKit \
  -framework CoreFoundation -framework AudioToolbox -framework IOKit
-WINCXXFLAGS=/nologo /EHsc /MT /Igame-kit/allegro_stuff /Igame-kit/screen-reader \
+WINCXXFLAGS = /nologo /EHsc /MT /Igame-kit/allegro_stuff /Igame-kit/screen-reader \
  /Igame-kit/allegro_stuff/include-win /Igame-kit
 
 #required libraries
-LINLDFLAGS	= -lallegro_audio -lallegro_acodec -lallegro -lallegro_font -lspeechd
-MACLDFLAGS      = -L/usr/local/lib -lallegro_main -lallegro_audio -lallegro_acodec \
+LINLDFLAGS = -lallegro_audio -lallegro_acodec -lallegro -lallegro_font -lspeechd
+MACLDFLAGS = -L/usr/local/lib -lallegro_main -lallegro_audio -lallegro_acodec \
  -lallegro -lallegro_font -framework ApplicationServices -framework OpenGL \
  -framework OpenAL -framework AppKit -framework CoreFoundation -framework AudioToolbox -framework IOKit
-WINLDFLAGS=/nologo /subsystem:windows,5.01 /libpath:game-kit/allegro_stuff/win-lib32 \
+WINLDFLAGS = /nologo /subsystem:windows,5.01 /libpath:game-kit/allegro_stuff/win-lib32 \
  /libpath:game-kit/screen-reader dolapi.lib saapi32.lib nvdaControllerClient32.lib allegro_acodec.lib  allegro_audio.lib allegro.lib allegro_font.lib \
  FLAC.lib opengl32.lib ogg.lib vorbis.lib vorbisfile.lib dumb.lib freetype.lib winmm.lib psapi.lib gdi32.lib opus.lib opusfile.lib
 
 # directory with windows dlls to copy
-WINDLLDIR=game-kit/{allegro_stuff,screen-reader}/win-distrib32/*
+WINDLLDIR = game-kit/{allegro_stuff,screen-reader}/win-distrib32/*
 #formatting specific flags
 FORMATTER = astyle
 FORMAT_FLAGS = --style=gnu -Q
@@ -38,7 +38,7 @@ ECHO = echo
 
 	#source files to compile:
 # game-kit files, only update if game-kit has been updated.
-GK_S_FILES= game-kit/allegro_stuff/sound.cpp game-kit/allegro_stuff/keyboard.cpp \
+GK_S_FILES = game-kit/allegro_stuff/sound.cpp game-kit/allegro_stuff/keyboard.cpp \
  game-kit/screen-reader/screen_reader.cpp game-kit/allegro_stuff/dynamic_menu.cpp \
  game-kit/menu_helper.cpp game-kit/misc.cpp game-kit/soundplayer.cpp \
  game-kit/allegro_stuff/sound_pool_item.cpp game-kit/allegro_stuff/sound_pool.cpp
@@ -61,7 +61,7 @@ FULLDEFINE = \#define DEMO false
 endif
 
 # resources, items that should be copied into the package. (no spaces for now)
-RESOURCES =sounds
+RESOURCES = sounds
 
 ###
 ###YOU SHOULD NOT MODIFY ANYTHING PAST THIS POINT.
