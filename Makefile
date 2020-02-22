@@ -6,10 +6,10 @@ OUTPUT = horseshoes
 #compiler flags:
 #enable if you want to profile.
 PROF =
-LINCXXFLAGS = -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra -Wno-unused-variable \
+LINCXXFLAGS = -g -std=c++11 -O2 -Wall -pedantic -Wextra -Wno-unused-variable \
  -Wno-unused-parameter -I/usr/include/speech-dispatcher -I/usr/include -Igame-kit/allegro_stuff \
  -Igame-kit/screen-reader -Igame-kit
-MACCXXFLAGS = -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra \
+MACCXXFLAGS = -g -std=c++11 -O2 -Wall -pedantic -Wextra \
  -Wno-unused-variable -Wno-unused-parameter -I/usr/include -Igame-kit/allegro_stuff \
  -Igame-kit/screen-reader -Igame-kit -Igame-kit/allegro_stuff/include-mac \
  -framework ApplicationServices -framework OpenGL -framework OpenAL -framework AppKit \
